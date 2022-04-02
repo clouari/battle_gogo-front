@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<!-- 4월1일 2시50분 
+진행상태: 19번째 줄이 찍히는 상태 (수정하기 전) -->
+
 <html lang="en">
     <script
         src="https://code.jquery.com/jquery-3.6.0.js"
@@ -259,7 +262,7 @@
 
             <div class="buttons">
                 <input type="button" id="reload" value="한 판 더 !" class="btn btn-warning" onclick="">
-                <input type="button" value="기권" class="btn btn-warning" onclick="">
+                <input type="button" value="기권" class="btn btn-warning" onClick="location.href='index.php/game/result_lose.php'">
             </div>
 
             <!-- <form method="post" action="/index.php/stone/stone_insert">
@@ -387,8 +390,8 @@
         window.onload = function () {
 
             // 2초 간격으로 메시지를 보여줌
-            let comment_timerId = setInterval(() => getList(), 500);
-             let timerId = setInterval(() => set_board(), 500);
+            // let comment_timerId = setInterval(() => getList(), 500);
+            //  let timerId = setInterval(() => set_board(), 500);
 
 
 
