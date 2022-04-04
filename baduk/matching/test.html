@@ -1,0 +1,109 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+<button type="button" id="pay" class="btn btn-primary" autocomplete="off" style="width:8em">
+  Pay
+</button>
+
+<div class="progress" id="submit_progress" style="width:50%">
+  <div class="progress-bar progress-bar-success " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="load" style="width:0%">
+    0%
+  </div>
+</div>
+
+<script> 
+$('#pay').click(function() {
+
+    var timerId, percent;
+  
+    // reset progress bar
+    percent = 0;
+    $('#pay').attr('disabled', true);
+    $('#load').css('width', '0px');
+    $('#load').addClass('progress-bar-striped active');
+  
+  
+    timerId = setInterval(function() {
+  
+      // increment progress bar
+      percent += 5;
+      $('#load').css('width', percent + '%');
+      $('#load').html(percent + '%');
+  
+  
+      // complete
+      if (percent >= 100) {
+        clearInterval(timerId);
+        $('#pay').attr('disabled', false);
+        $('#load').removeClass('progress-bar-striped active');
+        $('#load').html('payment complete');
+  
+        // do more ...
+  
+      }
+  
+    }, 200);
+  
+  
+  });
+  
+
+</script>
+  
+  
+  
+  
+  <!-- /*
+  
+  function inc() {
+    var w = parseInt(document.getElementById("load").style.width);
+    w = w + 10;
+    document.getElementById("load").style.width = w + '%';
+    //console.log('inc: w=' + w );
+  
+  }
+  var c=0;
+  function pay() {
+    var w = parseInt(document.getElementById("load").style.width);
+    while (w != 100) {
+      c++;  // 75k times!!!
+      console.info( 'w=' + w + ', c=' + c);
+      setTimeout(inc, 2000);
+      console.log( 'timer' );
+      w = parseInt(document.getElementById("load").style.width);
+    }
+  
+  }
+  
+  */
+  
+  /*
+  
+  
+  function pay() {
+  
+  var timerId = setInterval(function() {
+    
+    var text, percent = parseInt( window.progress1.innerHTML );
+    
+    if (percent < 100) {
+      percent = (percent + 10) + '%';        
+      text = percent;
+    }
+    else {
+        clearInterval( timerId );
+        percent = '100%';
+        text = 'Payment complete';
+    }
+    window.progress1.innerHTML = text;
+    window.progress1.style.width = percent;
+    
+  }, 500);
+    
+  }
+  
+  */
+   -->
