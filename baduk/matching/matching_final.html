@@ -137,7 +137,7 @@ const animate = () => {
   progressBar.style.width = `${barWidth}%`;
   setTimeout(() => {
     loadingMsg.innerHTML = `상대방 매칭까지 ${barWidth}%`;
-  }, 5050);
+  }, 0);
 };
 
 // 지정한 시간 이후에 시작
@@ -148,7 +148,7 @@ setTimeout(() => {
     } else {
       animate();
     }
-  }, 50); // 여기서 시간 조절하기
-}, 1000);
+  }, 25); // 여기서 시간 조절하기
+}, 500);
 
 </script>
