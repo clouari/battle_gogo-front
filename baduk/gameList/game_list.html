@@ -1,0 +1,188 @@
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+                rel="stylesheet">
+                <script
+                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+                <style>
+                    body {
+                        background-color: bisque;
+                        display: flex;
+                        text-align: center;
+                        max-width: 400px;
+                        display: flex;
+                        flex-direction:column;
+                        overflow: hidden;
+                        border-radius: 2rem;
+                        box-shadow: 0px 1rem 1.5rem rgba(0,0,0,0.5);
+                        
+                    }
+                    .hc{
+                        width: 200px;
+                        left: 0;
+                        right: 0;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .vc{
+                        height: 100%;
+                        width: 100%;
+                        top: 0;
+                        bottom: 0;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                    }
+
+                    form {
+                        position: absolute;
+                        display: flex;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    .scrollindicator{
+                        width: 100%;
+                        height: 7px; /* height of progress bar */
+                        display: block;
+                        background: white;
+                        left: 0;
+                        top: 0; /* dock progress bar to bottom of page (change to "top" for top instead) */
+                        cursor: pointer;
+                        position: fixed;
+                        z-index: 1000000;
+                        visibility: hidden;
+                        -webkit-transition: height .2s ease;
+                        transition: height .2s ease;
+                        }
+
+                    .scrollprogress{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background: purple; /* background color of progress bar */
+                        -webkit-transform: translate3d(-100%,0,0);
+                        transform: translate3d(-100%,0,0);
+                        -webkit-transition: -webkit-transform .4s ease; 
+                        transition: transform .4s ease; /* animate progress bar? Remove to disable */
+                        }
+
+                </style>
+            </head>
+            <body class="hc vc"> 
+              <div class="scrollindicator">
+                <div class="scrollprogress"></div>
+            </div>
+            <table class="table table-bordered" id="hc vc">  
+             
+            <br/>
+            <br/>
+            <form >
+            <h1>대기실</h1>  <br /><br />
+            <h2><?php echo $profile['nick'].'님'.' '.$profile['win'].'승 '.$profile['lose']?>패</h2>
+            
+            
+  
+    <thead>
+        <tr>
+        <th>게임형식</th>
+        <th>방제목</th>
+        <th>입장하기</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+<?php
+foreach($board_list as $row)
+{ 
+
+  if ($row['status'] == 0) {
+    $row['status'] = '대기';
+    $row['button_label'] = '게임시작';
+  }
+  else if($row['status'] == 1) {
+    $row['status'] = '관전';
+    $row['button_label'] = '관전입장';
+  }
+  else if($row['status'] == 2) {
+    $row['status'] = '완료';
+    $row['button_label'] = '기보보기';
+  }
+?>
+
+      <tr>
+        <td><?php echo $row['status']?></td>
+        <td><?php echo $row['title']?></td>
+        <td><a href="/index.php/game/play"><?php echo $row['button_label']?></a></td>
+      </tr>
+
+<?php
+}
+?>
+
+                </tbody>
+
+              </table>
+           <a href="/index.php/game/create">방만들기</a>
+           
+            </form>
+          </table>
+       </body>
+       <script>
+         jQuery(function($){
+  var growmouseover = [true, '25px'] // magnify progress bar onmouseover? [Boolean, newheight]
+
+///////// No need to edit beyond here /////////
+
+  var $indicatorparts = $(document.body).append('<div class="scrollindicator"><div class="scrollprogress"></div></div>')
+  var $indicatorMain = $indicatorparts.find('div.scrollindicator')
+  var $scrollProgress = $indicatorparts.find('div.scrollprogress')
+  var indicatorHeight = $indicatorMain.outerHeight()
+  var transformsupport = $scrollProgress.css('transform')
+  transformsupport = (transformsupport == "none" || transformsupport =="")? false: true
+
+  function syncscrollprogress(){
+      var winheight = $(window).height()
+      var docheight = $(document).height()
+      var scrollTop = $(window).scrollTop()
+      var trackLength = docheight - winheight
+      var pctScrolled = Math.floor(scrollTop/trackLength * 100) // gets percentage scrolled (ie: 80 NaN if tracklength == 0)
+      $scrollProgress.css('transform', 'translate3d(' + (-100 + pctScrolled) + '%,0,0)')
+  }
+  
+  if (transformsupport){
+    $indicatorMain.css('visibility', 'visible')
+  
+    $indicatorMain.on('click', function(e){
+      var trackLength = $(document).height() - $(window).height()
+      var scrollamt = e.clientX/($(window).width()-32) * trackLength
+      $('html,body').animate({scrollTop: scrollamt}, 'fast')
+    })
+  
+    if (growmouseover[0]){
+      $indicatorMain.on('mouseenter touchstart', function(e){
+        $(this).css('height', growmouseover[1])
+        e.stopPropagation()
+      })
+    
+      $indicatorMain.on('mouseleave', function(e){
+        $(this).css('height', indicatorHeight)
+      })
+      
+      $(document).on('touchstart', function(e){
+        $indicatorMain.css('height', indicatorHeight)
+      })
+    }
+    
+    $(window).on("scroll load", function(){
+      requestAnimationFrame(syncscrollprogress)
+    })
+  }
+})
+       </script>
+        
+</html>
