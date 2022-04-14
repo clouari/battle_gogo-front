@@ -50,6 +50,37 @@
         box-sizing: border-box;
         padding: 20px;
     }
+
+    header h1{
+    position: absolute; /*absolute로 해야, 뭘 하든 그 위치를 사수한다.*/
+    font: bold 50px/1 'orbitron';
+    color: #fff;
+    letter-spacing: 1px;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-150%); /*세로 방향 조절*/
+    }
+
+    header h1::before {
+        content: 'SITE-MONSTER';
+        display: block;
+        font: 14px/1 'orbitron';
+        color: white;
+        letter-spacing: 2px;
+        position: absolute;
+        left: 0px;
+        top: 140px;
+        opacity: 1.0;
+    }
+
+    header h1::after {
+        content: '';
+        display: block;
+        width: 180px;
+        height: 2px;
+        background: white;
+        margin-top: 20px;
+    }
         
 
 
@@ -59,8 +90,7 @@
 <body>
     <!-- 화면 왼쪽에 고정할 Header -->
     <header>
-
-    
+        <h1> Hagun Lab</h1>
     </header>
 
     <!-- 들어갈 콘덴츠 영역 -->
