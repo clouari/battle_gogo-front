@@ -81,6 +81,77 @@
         background: white;
         margin-top: 20px;
     }
+
+    .login_btn{
+            padding: 0.2 rem;
+            justify-content: center;
+    }
+    .w-btn {
+        position: relative;
+        border: none;
+        display: inline-block;
+        padding: 10px 30px;
+        border-radius: 15px;
+        font-family: "paybooc-Light", sans-serif;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.25s;
+        transform: translateY(50%);
+        transition: transform 200ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    .w-btn:hover {
+        transform: translateY(50%) scale(1.3);
+    }
+
+    .w-btn-gra3 {
+            background: linear-gradient(
+                45deg,
+                #ff0000,
+                #ff7300,
+                #fffb00,
+                #48ff00,
+                #00ffd5,
+                #002bff,
+                #7a00ff,
+                #ff00c8,
+                #ff0000
+            );
+            color: white;
+    }
+    .w-btn-gra-anim {
+            background-size: 400% 400%;
+            animation: gradient1 5s ease infinite;
+    }
+    @keyframes gradient1 {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+    }
+
+        @keyframes gradient2 {
+            0% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+    }
+
+    header ul {
+        position: absolute;
+        left: 40px;
+        bottom: 100px;
+    }
         
 
 
@@ -91,6 +162,11 @@
     <!-- 화면 왼쪽에 고정할 Header -->
     <header>
         <h1> Hagun Lab</h1>
+            <ul>
+                <li>
+                <li class="login_btn"> <input type="submit" value="사이트 이동하기" class="w-btn w-btn-gra3 w-btn-gra-anim"><br><br>
+                </li>
+            </ul>
     </header>
 
     <!-- 들어갈 콘덴츠 영역 -->
